@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ошибка</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    .error-message {
+      color: red;
+      font-size: 18px;
+    }
+    .close-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #d7a500;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .close-button:hover {
+      background-color: #005a9e;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-message">
+    <p>Server oder Port ist nicht angegeben. Bitte überprüfen Sie die Einstellungen.</p>
+  </div>
+  <button class="close-button" onclick="sendMessageAndClose()">neЗакрыть</button>
+  
+  <script>
+    function sendMessageAndClose() {
+      Office.context.ui.messageParent("Ошибка: Сервер или порт не указан.");
+    }
+  </script>
+</body>
+</html>

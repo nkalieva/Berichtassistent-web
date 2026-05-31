@@ -1,0 +1,156 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. -->
+<!-- This file shows how to design a first-run page that provides a welcome screen to the user about the features of the add-in. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Berichtsassistent 2 Add-in</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+    <!-- For more information on Fluent UI, visit https://developer.microsoft.com/fluentui#/. -->
+    <link rel="stylesheet"
+        href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css" />
+
+    <!-- Template styles -->
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="ms-font-m ms-welcome ms-Fabric">
+    <header class="ms-welcome__header ms-bgColor-neutralLighter">
+
+        <h1 class="ms-font-su" style="margin-top: 5; font-size: 20px;">API Einstellung</h1>
+    </header>
+    <section id="sideload-msg" class="ms-welcome__main">
+    </section>
+    <style>
+        .ms-List .ms-ListItem {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+        }
+
+        .ms-List label {
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+
+        .ms-List input {
+            width: 100%;
+        }
+
+        #saveServerParams {
+            color: black;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #saveServerParams .ms-Button-label {
+            font-size: 13px;
+        }
+    </style>
+
+    <main id="app-body" class="ms-welcome__main">
+        <h2 id="subheading" class="ms-font-m" style="font-size: 11px;">Bitte hier URL und Port des API-Dienstes
+            (BA2API) eingeben</h2>
+        <ul id="loginContainer" class="ms-List ms-welcome__features">
+            <li class="ms-ListItem">
+                <label for="serverInput" class="ms-font-m">API Server:</label>
+                <input type="text" id="serverInput">
+            </li>
+            <li class="ms-ListItem">
+                <label for="portInput" class="ms-font-m">API Port:</label>
+                <input type="text" id="portInput">
+            </li>
+        </ul>
+        <button id="saveServerParams" class="ms-Button ms-Button--hero ms-font-xl">
+            <span class="ms-Button-label" style="color: black;">Anwenden</span>
+        </button>
+        <div style="margin-top: 80px;">
+            <input type="checkbox" id="httpsCheckbox" name="httpsCheckbox" />
+            <label for="httpsCheckbox" style="color: black;">HTTPs</label>
+        </div>
+    </main>
+    <html lang="de">
+        <head>
+            <meta charset="UTF-8">
+            <title>Fehlermeldung</title>
+            <style>
+                /* style */
+                .modal {
+                    display: none; 
+                    position: fixed;
+                    z-index: 1; 
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: auto; 
+                    background-color: rgb(0,0,0); 
+                    background-color: rgba(0,0,0,0.4);
+                }
+        
+                /* inhalt */
+                .modal-content {
+                    background-color: #fefefe;
+                    margin: 15% auto; 
+                    padding: 20px;
+                    border: 1px solid #888;
+                    width: 80%; 
+                }
+        
+                /* close modal */
+                .close {
+                    color: #aaa;
+                    float: right;
+                    font-size: 28px;
+                    font-weight: bold;
+                }
+        
+                .close:hover,
+                .close:focus {
+                    color: black;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            </style>
+        </head>
+        <body>
+            <!-- modal fenster -->
+            <div id="errorModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p id="errorMessage">Server oder Port ist nicht angegeben</p>
+                </div>
+            </div>
+        
+            <script>
+                var modal = document.getElementById("errorModal");
+        
+                var span = document.getElementsByClassName("close")[0];
+        
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
+        
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+
+                function showError(message) {
+                    document.getElementById("errorMessage").innerText = message;
+                    modal.style.display = "block";
+                }
+            </script>
+        </body>
+        </html>
+</html>
